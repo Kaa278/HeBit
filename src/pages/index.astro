@@ -3,16 +3,16 @@ const whatsappNumber = "6285176729586";
 
 const products = [
   {
-    name: "Paket Harian GPT 5.5",
+    name: "Paket Harian All Model",
     shortName: "Harian",
     price: "Rp20.000",
     priceShort: "Rp20k",
     duration: "1 hari",
-    description: "Akses model GPT 5.5 dengan limit unlimited untuk kebutuhan cepat, testing, atau tugas dadakan.",
+    description: "Akses semua model termasuk Claude Opus 3.7 dengan limit unlimited untuk kebutuhan intensif harian.",
     badge: "Starter",
     highlight: "Cocok buat coba cepat",
     featured: false,
-    features: ["GPT 5.5", "Limit unlimited", "Aktif 1 hari", "Cocok Untuk Kebut Semalam"],
+    features: ["All model akses", "Limit unlimited", "Aktif 1 hari", "Cocok Untuk Kebut Semalam"],
   },
   {
     name: "Paket Mingguan All Model",
@@ -24,7 +24,7 @@ const products = [
     badge: "Paling Laris",
     highlight: "Best value mingguan",
     featured: true,
-    features: ["All model premium", "Claude Opus 3.7", "Limit unlimited", "Aktif 7 hari"],
+    features: ["All model akses", "Tersedia Claude Opus 3.7", "Limit unlimited", "Aktif 7 hari"],
   },
   {
     name: "Paket Bulanan All Model",
@@ -36,7 +36,7 @@ const products = [
     badge: "Paling Hemat",
     highlight: "Harga paling efisien",
     featured: false,
-    features: ["All model premium", "Limit unlimited", "Aktif 30 hari", "Lebih hemat per hari"],
+    features: ["All model akses", "Limit unlimited", "Aktif 30 hari", "Lebih hemat per hari"],
   },
 ];
 
@@ -697,6 +697,62 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
         box-shadow: var(--sh-md);
         overflow: hidden;
       }
+      .qs-panel-toggle {
+        min-height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        background: rgba(255,255,255,.018);
+        color: var(--ink);
+        cursor: pointer;
+        list-style: none;
+      }
+      .qs-panel-toggle::-webkit-details-marker { display: none; }
+      .qs-panel-toggle-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .qs-panel-toggle-copy strong {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1rem;
+        letter-spacing: -.025em;
+      }
+      .qs-panel-toggle-copy span {
+        color: var(--ink2);
+        font-size: .84rem;
+        line-height: 1.5;
+      }
+      .qs-panel-toggle-icon {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg3);
+        color: var(--ink2);
+        transition: transform .2s ease, color .2s ease, border-color .2s ease;
+      }
+      .qs-panel-toggle-icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+      }
+      .qs-panel[open] .qs-panel-toggle {
+        border-bottom: 1px solid var(--border);
+      }
+      .qs-panel[open] .qs-panel-toggle-icon {
+        transform: rotate(180deg);
+        color: var(--ink);
+        border-color: var(--border-hi);
+      }
       .qs-tabs {
         display: flex;
         flex-wrap: wrap;
@@ -921,6 +977,8 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
       @media (max-width: 560px) {
         .quick-start-section { padding: 64px 0; }
         .qs-panel { border-radius: var(--r-lg); }
+        .qs-panel-toggle { padding: 16px; align-items: flex-start; }
+        .qs-panel-toggle-copy span { font-size: .8rem; }
         .qs-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px; }
         .qs-tab { width: 100%; padding: 9px 10px; font-size: .84rem; }
         .qs-content-wrap { padding: 14px; }
@@ -1445,47 +1503,54 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
           <h2 id="quick-start-title" class="sec-title">Mulai dalam Hitungan Menit</h2>
           <p class="sec-sub">Pilih OS kamu, ikuti langkahnya, dan API HeBit langsung siap di editor favoritmu.</p>
 
-          <div class="qs-panel">
+          <details class="qs-panel">
+            <summary class="qs-panel-toggle">
+              <span class="qs-panel-toggle-copy">
+                <strong>Tutorial instalasi</strong>
+                <span>Buka panduan OS kalau kamu lagi butuh setup HeBit.</span>
+              </span>
+              <span class="qs-panel-toggle-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </summary>
+
             <div class="qs-tabs" role="tablist" aria-label="Quick start OS selector">
-              <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-win" id="qs-tab-win" data-os="windows">Windows</button>
+              <button class="qs-tab active" role="tab" aria-selected="true" aria-controls="qs-win" id="qs-tab-win" data-os="win">Windows</button>
               <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-mac" id="qs-tab-mac" data-os="mac">macOS</button>
               <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-linux" id="qs-tab-linux" data-os="linux">Linux</button>
             </div>
 
             <div class="qs-content" id="qs-win" role="tabpanel" aria-labelledby="qs-tab-win">
-              <div class="qs-content-wrap">
-                <article class="qs-step">
-                  <span class="qs-step-num">01</span>
-                  <h3>Download Installer</h3>
-                  <a class="qs-download-btn" href="/scripts/hebit-windows-installer.zip" download>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8.5 10.5L12 14l3.5-3.5M5 18h14"/></svg>
-                    Download Installer (.zip)
-                  </a>
-                  <small class="qs-note">Download zip, ekstrak, lalu jalankan installer.</small>
-                </article>
-                <article class="qs-step">
-                  <span class="qs-step-num">02</span>
-                  <h3>Jalankan Installer</h3>
-                  <p style="margin-bottom:8px;font-size:0.875rem;color:var(--ink2);">
-                    Ekstrak ZIP, lalu klik kanan
-                    <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">HeBit-Windows-Setup.bat</code>
-                    → <strong>Run as Administrator</strong>
-                  </p>
-                  <small class="qs-note">
-                    Kalau muncul popup "Windows protected your PC" → klik
-                    <strong>More info</strong> → <strong>Run anyway</strong>.
-                    Ini normal untuk installer tanpa digital signature.
-                  </small>
-                </article>
-                <article class="qs-step">
-                  <span class="qs-step-num">03</span>
-                  <h3>Selesai setup</h3>
-                  <p>Buka editor, HeBit sudah siap digunakan.</p>
-                </article>
-              </div>
+              <article class="qs-step">
+                <span class="qs-step-num">01</span>
+                <h3>Download Installer</h3>
+                <a class="qs-download-btn" href="/scripts/hebit-windows-installer.zip" download>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8.5 10.5L12 14l3.5-3.5M5 18h14"/></svg>
+                  Download Installer (.zip)
+                </a>
+                <small class="qs-note">Download zip, ekstrak, lalu jalankan installer.</small>
+              </article>
+              <article class="qs-step">
+                <span class="qs-step-num">02</span>
+                <h3>Jalankan Installer</h3>
+                <p style="margin-bottom:8px;font-size:0.875rem;color:var(--ink2);">
+                  Ekstrak ZIP, lalu klik kanan
+                  <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">HeBit-Windows-Setup.bat</code>
+                  → <strong>Run as Administrator</strong>
+                </p>
+                <small class="qs-note">
+                  Kalau muncul popup "Windows protected your PC" → klik
+                  <strong>More info</strong> → <strong>Run anyway</strong>.
+                </small>
+              </article>
+              <article class="qs-step">
+                <span class="qs-step-num">03</span>
+                <h3>Selesai setup</h3>
+                <p>Buka editor, HeBit sudah siap digunakan.</p>
+              </article>
             </div>
 
-              <div class="qs-content" id="qs-mac" role="tabpanel" aria-labelledby="qs-tab-mac">
+            <div class="qs-content" id="qs-mac" role="tabpanel" aria-labelledby="qs-tab-mac" aria-hidden="true">
                 <article class="qs-step">
                   <span class="qs-step-num">01</span>
                   <h3>Download script instalasi</h3>
@@ -1511,7 +1576,7 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
                 </article>
               </div>
 
-              <div class="qs-content" id="qs-linux" role="tabpanel" aria-labelledby="qs-tab-linux">
+              <div class="qs-content" id="qs-linux" role="tabpanel" aria-labelledby="qs-tab-linux" aria-hidden="true">
                 <article class="qs-step">
                   <span class="qs-step-num">01</span>
                   <h3>Download installer</h3>
@@ -1535,8 +1600,7 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
                   <p>Buka editor, HeBit sudah siap digunakan.</p>
                 </article>
               </div>
-            </div>
-          </div>
+          </details>
 
           <div class="qs-tools">
             <div class="qs-tools-head">
@@ -1822,9 +1886,8 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
 
         if (tabs.length && panels.length) {
           const userAgent = navigator.userAgent;
-          let defaultOs = 'linux';
-          if (userAgent.includes('Win')) defaultOs = 'windows';
-          else if (userAgent.includes('Mac')) defaultOs = 'mac';
+          let defaultOs = 'win';
+          if (userAgent.includes('Mac')) defaultOs = 'mac';
 
           const setActiveTab = (os: string) => {
             tabs.forEach((tab) => {
