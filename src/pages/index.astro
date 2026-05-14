@@ -1994,7 +1994,30 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt, displayModel: selectedModelLabel }),
           });
-          const data = await res.json();
+          const contentType = res.headers.get("content-type") || "";
+          const rawResponse = await res.text();
+          let data: any = {};
+
+          if (rawResponse) {
+            if (!contentType.includes("application/json")) {
+              const preview = rawResponse
+                .replace(/<[^>]*>/g, " ")
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(0, 160);
+
+              throw new Error(
+                `Endpoint API mengembalikan respons non-JSON (${res.status}). ${preview || "Cek konfigurasi deployment Vercel."}`
+              );
+            }
+
+            try {
+              data = JSON.parse(rawResponse);
+            } catch {
+              throw new Error("Endpoint API mengembalikan JSON tidak valid.");
+            }
+          }
+
           if (!res.ok) throw new Error(data?.error?.message || data?.error || "API error");
 
           trialLeft = decrementTrial();
