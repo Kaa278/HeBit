@@ -1,17 +1,2095 @@
 ---
+const whatsappNumber = "6285176729586";
 
+const products = [
+  {
+    name: "Paket Harian GPT 5.5",
+    shortName: "Harian",
+    price: "Rp20.000",
+    priceShort: "Rp20k",
+    duration: "1 hari",
+    description: "Akses model GPT 5.5 dengan limit unlimited untuk kebutuhan cepat, testing, atau tugas dadakan.",
+    badge: "Starter",
+    highlight: "Cocok buat coba cepat",
+    featured: false,
+    features: ["GPT 5.5", "Limit unlimited", "Aktif 1 hari", "Cocok Untuk Kebut Semalam"],
+  },
+  {
+    name: "Paket Mingguan All Model",
+    shortName: "Mingguan",
+    price: "Rp80.000",
+    priceShort: "Rp80k",
+    duration: "7 hari",
+    description: "Akses semua model termasuk Claude Opus 3.7 dengan limit unlimited untuk kebutuhan intensif mingguan.",
+    badge: "Paling Laris",
+    highlight: "Best value mingguan",
+    featured: true,
+    features: ["All model premium", "Claude Opus 3.7", "Limit unlimited", "Aktif 7 hari"],
+  },
+  {
+    name: "Paket Bulanan All Model",
+    shortName: "Bulanan",
+    price: "Rp249.000",
+    priceShort: "Rp249k",
+    duration: "30 hari",
+    description: "Akses semua model premium dengan limit unlimited untuk workflow rutin, produktif, dan lebih hemat.",
+    badge: "Paling Hemat",
+    highlight: "Harga paling efisien",
+    featured: false,
+    features: ["All model premium", "Limit unlimited", "Aktif 30 hari", "Lebih hemat per hari"],
+  },
+];
+
+const navLinks = [
+  { label: "Produk", href: "#produk" },
+  { label: "IDE Connect", href: "#ide-connect" },
+  { label: "Quick Start", href: "#quick-start" },
+  { label: "Playground", href: "#playground" },
+  { label: "Model", href: "#semua-model" },
+  { label: "Cara Order", href: "#cara-order" },
+  { label: "FAQ", href: "#faq" },
+];
+
+const stats = [
+  { value: "3", label: "pilihan paket" },
+  { value: "24/7", label: "bisa order kapan aja" },
+  { value: "WA", label: "checkout simple" },
+];
+
+const benefits = [
+  {
+    title: "Respon Cepat",
+    description: "Langsung diarahkan ke WhatsApp dengan format pesan otomatis, jadi admin bisa proses lebih cepat.",
+    icon: `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`,
+  },
+  {
+    title: "Harga Transparan",
+    description: "Harga, durasi, dan benefit tiap paket ditampilkan jelas tanpa flow checkout yang membingungkan.",
+    icon: `<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>`,
+  },
+  {
+    title: "Akses Fleksibel",
+    description: "Mulai dari harian untuk coba cepat sampai bulanan untuk pemakaian rutin yang lebih hemat.",
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+  },
+];
+
+const faqs = [
+  {
+    question: "Apakah ini benar-benar unlimited?",
+    answer: "Ya, paket ditawarkan dengan limit unlimited sesuai durasi aktif paket yang dipilih.",
+  },
+  {
+    question: "Bisa upgrade paket di tengah jalan?",
+    answer: "Bisa, tinggal chat admin HeBit untuk hitung selisih dan proses upgrade paket.",
+  },
+  {
+    question: "Bagaimana kalau butuh custom paket?",
+    answer: "Bisa request custom via WhatsApp, nanti paket disesuaikan dengan kebutuhan kamu.",
+  },
+  {
+    question: "Aktivasi aksesnya gimana?",
+    answer: "Setelah pembayaran dikonfirmasi, admin HeBit akan bantu proses aktivasi dan kirim detail akses.",
+  },
+];
+
+const ides = [
+  {
+    name: "VS Code",
+    desc: "Extension resmi",
+    color: "#007ACC",
+    icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><mask id="m"><rect width="100" height="100" rx="15" fill="white"/></mask><rect width="100" height="100" rx="15" fill="#007ACC"/><g mask="url(#m)"><path d="M70.9 9.3L50 34.2 30.5 16.5 9 27.3v45.4l21.5 10.8L50 65.8l20.9 24.9L92 79.4V20.6L70.9 9.3zm0 57.4L53.5 50l17.4-16.7v33.4z" fill="white"/></g></svg>`,
+  },
+  {
+    name: "Cursor",
+    desc: "AI-first editor",
+    color: "#ffffff",
+    icon: `<img src="https://cdn.simpleicons.org/cursor/ffffff" width="36" height="36" alt="Cursor" />`,
+  },
+  {
+    name: "Windsurf",
+    desc: "Agentic IDE",
+    color: "#06B6D4",
+    icon: `<img src="https://cdn.simpleicons.org/windsurf/06B6D4" width="36" height="36" alt="Windsurf" />`,
+  },
+  {
+    name: "Neovim",
+    desc: "Plugin support",
+    color: "#57A143",
+    icon: `<img src="https://cdn.simpleicons.org/neovim/57A143" width="36" height="36" alt="Neovim" />`,
+  },
+  {
+    name: "JetBrains",
+    desc: "Plugin universal",
+    color: "#FF318C",
+    icon: `<img src="https://cdn.simpleicons.org/jetbrains/FF318C" width="36" height="36" alt="JetBrains" />`,
+  },
+  {
+    name: "Zed",
+    desc: "Ultra-fast editor",
+    color: "#F59E0B",
+    icon: `<img src="https://cdn.simpleicons.org/zedindustries/F59E0B" width="36" height="36" alt="Zed" />`,
+  },
+  {
+    name: "Vim",
+    desc: "Plugin support",
+    color: "#019733",
+    icon: `<img src="https://cdn.simpleicons.org/vim/019733" width="36" height="36" alt="Vim" />`,
+  },
+  {
+    name: "Emacs",
+    desc: "LSP support",
+    color: "#7F5AF0",
+    icon: `<img src="https://cdn.simpleicons.org/gnuemacs/7F5AF0" width="36" height="36" alt="Emacs" />`,
+  },
+  {
+    name: "Sublime Text",
+    desc: "Package support",
+    color: "#FF9800",
+    icon: `<img src="https://cdn.simpleicons.org/sublimetext/FF9800" width="36" height="36" alt="Sublime Text" />`,
+  },
+  {
+    name: "Replit",
+    desc: "Agent integration",
+    color: "#F26207",
+    icon: `<img src="https://cdn.simpleicons.org/replit/F26207" width="36" height="36" alt="Replit" />`,
+  },
+  {
+    name: "GitHub Copilot",
+    desc: "VS Code extension",
+    color: "#ffffff",
+    icon: `<img src="https://cdn.simpleicons.org/githubcopilot/ffffff" width="36" height="36" alt="GitHub Copilot" />`,
+  },
+  {
+    name: "Xcode",
+    desc: "Swift / iOS dev",
+    color: "#1D7BF5",
+    icon: `<img src="https://cdn.simpleicons.org/xcode/1D7BF5" width="36" height="36" alt="Xcode" />`,
+  },
+  {
+    name: "OpenCode",
+    desc: "Open-source CLI",
+    color: "#22C55E",
+    icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0d1f12"/><path d="M5 8l4 4-4 4M11 16h8" stroke="#22C55E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    name: "Antigravity",
+    desc: "AI coding agent",
+    color: "#F97316",
+    icon: `<svg viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ag-grad" x1="56" y1="8" x2="56" y2="104" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FF8A00"/><stop offset="28%" stop-color="#FF4D6D"/><stop offset="54%" stop-color="#8B5CF6"/><stop offset="78%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs><path d="M89.6992 93.695C94.3659 97.195 101.366 94.8617 94.9492 88.445C75.6992 69.7783 79.7825 18.445 55.8659 18.445C31.9492 18.445 36.0325 69.7783 16.7825 88.445C9.78251 95.445 17.3658 97.195 22.0325 93.695C40.1159 81.445 38.9492 59.8617 55.8659 59.8617C72.7825 59.8617 71.6159 81.445 89.6992 93.695Z" fill="url(#ag-grad)"/></svg>`,
+  },
+];
+
+const createWhatsAppLink = (productName: string, price: string) => {
+  const text = `Halo HeBit, saya mau beli ${productName} (${price}). Masih ready?`;
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+};
+
+const trialLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Halo HeBit, saya mau ambil Trial Key untuk coba API-nya.")}`;
+const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Halo HeBit, saya mau konsultasi paket yang cocok.")}`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>HeBit — Katalog API & Produk Digital</title>
+    <meta name="description" content="HeBit menyediakan katalog paket akses API harian, mingguan, dan bulanan dengan proses order cepat via WhatsApp." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        /* ── Dark Neutral Palette ── */
+        --bg:         #0e0e11;          /* almost black, slight blue tint */
+        --bg2:        #131317;          /* card background */
+        --bg3:        #1a1a20;          /* elevated surface */
+        --border:     rgba(255,255,255,.07);
+        --border-hi:  rgba(255,255,255,.13);
+
+        --ink:        #f0eff6;          /* near-white, very slight purple */
+        --ink2:       #c8c6d8;          /* secondary text */
+        --muted:      #6e6c82;          /* muted / labels */
+        --dim:        #3d3b52;          /* dimmer borders */
+
+        --primary:    #6366f1;          /* indigo */
+        --primary-dk: #4f46e5;
+        --primary-lt: rgba(99,102,241,.12);
+        --accent:     #22c55e;          /* green */
+        --accent-lt:  rgba(34,197,94,.12);
+
+        --r-sm:  10px;
+        --r-md:  16px;
+        --r-lg:  22px;
+        --r-xl:  30px;
+        --sh-sm: 0 2px 12px rgba(0,0,0,.35);
+        --sh-md: 0 8px 32px rgba(0,0,0,.45);
+        --sh-lg: 0 20px 60px rgba(0,0,0,.55);
+      }
+
+      html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+      body {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100dvh;
+        overflow-x: hidden;
+      }
+
+      /* subtle noise grain */
+      body::before {
+        content: '';
+        position: fixed; inset: 0; z-index: -2; pointer-events: none;
+        background:
+          radial-gradient(ellipse 55% 50% at 8% 0%,  rgba(99,102,241,.09) 0%, transparent 60%),
+          radial-gradient(ellipse 45% 40% at 92% 18%, rgba(34,197,94,.07) 0%, transparent 55%),
+          radial-gradient(ellipse 60% 50% at 50% 100%,rgba(99,102,241,.05) 0%, transparent 60%);
+      }
+      body::after {
+        content: '';
+        position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,.6) 0%, transparent 55%);
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+      /* ── NAV ── */
+      .site-header {
+        position: sticky; top: 0; z-index: 100;
+        border-bottom: 1px solid var(--border);
+        background: rgba(14,14,17,.85);
+        backdrop-filter: blur(22px);
+      }
+      .nav {
+        height: 66px;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .brand-wordmark {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.4rem; font-weight: 800;
+        letter-spacing: -.04em; color: var(--ink); line-height: 1;
+      }
+      .brand-wordmark span {
+        background: linear-gradient(135deg, var(--primary), #818cf8);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .brand-sub {
+        font-size: .67rem; font-weight: 500;
+        letter-spacing: .08em; text-transform: uppercase;
+        color: var(--muted); margin-top: 2px;
+      }
+      .nav-pill {
+        display: flex; align-items: center; gap: 2px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 999px; padding: 4px;
+      }
+      .nav-pill a {
+        padding: 6px 14px; border-radius: 999px;
+        font-size: .86rem; font-weight: 500; color: var(--ink2);
+        transition: background .18s, color .18s;
+      }
+      .nav-pill a:hover { background: var(--primary-lt); color: var(--ink); }
+
+      /* ── BUTTONS ── */
+      .btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 10px 20px; border-radius: 999px;
+        font-family: inherit; font-size: .88rem; font-weight: 600;
+        border: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+        transition: transform .2s, box-shadow .2s;
+      }
+      .btn:hover  { transform: translateY(-2px); }
+      .btn:active { transform: scale(.98); }
+      .btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+      .btn-green {
+        background: linear-gradient(135deg, #16a34a, var(--accent));
+        color: #fff; box-shadow: 0 8px 22px rgba(34,197,94,.22);
+      }
+      .btn-green:hover { box-shadow: 0 12px 32px rgba(34,197,94,.32); }
+
+      .btn-ghost {
+        background: var(--bg3); color: var(--ink2);
+        border: 1px solid var(--border-hi); box-shadow: var(--sh-sm);
+      }
+      .btn-ghost:hover { color: var(--ink); border-color: var(--primary); }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary-dk), var(--primary));
+        color: #fff; box-shadow: 0 8px 22px rgba(99,102,241,.22);
+      }
+      .btn-primary:hover { box-shadow: 0 12px 32px rgba(99,102,241,.32); }
+
+      .btn-lg  { padding: 13px 26px; font-size: .95rem; }
+      .btn-full { width: 100%; justify-content: center; }
+
+      /* ── HERO ── */
+      .hero { padding: clamp(60px,9vw,108px) 0 clamp(48px,7vw,80px); }
+      .hero-grid { display: grid; gap: 3rem; align-items: center; }
+      @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.08fr .92fr; gap: 4rem; } }
+
+      .eyebrow {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 5px 13px;
+        background: var(--bg2); border: 1px solid var(--border-hi);
+        border-radius: 999px;
+        font-size: .79rem; font-weight: 600; color: var(--ink2);
+        margin-bottom: 1rem; box-shadow: var(--sh-sm);
+      }
+      .eyebrow-dot {
+        width: 7px; height: 7px; border-radius: 999px;
+        background: var(--accent); box-shadow: 0 0 0 4px rgba(34,197,94,.15);
+      }
+      .hero-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(2.8rem, 7.5vw, 5.4rem);
+        font-weight: 800; line-height: .96; letter-spacing: -.058em;
+        color: var(--ink); margin-bottom: 1.2rem;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #818cf8 0%, var(--primary) 45%, #a5b4fc 90%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-sub {
+        font-size: clamp(.97rem,1.8vw,1.07rem); line-height: 1.78;
+        color: var(--ink2); max-width: 54ch; margin-bottom: 1.8rem;
+      }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.4rem; }
+      .hero-badges  { display: flex; flex-wrap: wrap; gap: 12px; }
+      .badge-pill {
+        display: inline-flex; align-items: center; gap: 7px;
+        font-size: .82rem; font-weight: 500; color: var(--ink2);
+      }
+      .badge-pill::before {
+        content: ''; width: 6px; height: 6px; border-radius: 999px;
+        background: var(--accent); flex-shrink: 0;
+      }
+      .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 2rem; }
+      .stat-card {
+        padding: 15px;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-md); box-shadow: var(--sh-sm);
+      }
+      .stat-val {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.75rem; font-weight: 800;
+        letter-spacing: -.05em; color: var(--ink); line-height: 1; margin-bottom: 3px;
+      }
+      .stat-lbl { font-size: .82rem; color: var(--muted); line-height: 1.4; }
+
+      /* ── HERO PANEL ── */
+      .hero-panel-wrap { position: relative; }
+      .orb {
+        position: absolute; border-radius: 999px;
+        filter: blur(55px); pointer-events: none; z-index: 0;
+      }
+      .orb-a { width:160px; height:160px; top:-28px; right:-8px;  background: rgba(34,197,94,.13); }
+      .orb-b { width:210px; height:210px; bottom:-38px; left:-28px; background: rgba(99,102,241,.11); }
+      .hero-panel {
+        position: relative; z-index: 1; overflow: hidden;
+        background: var(--bg2); border: 1px solid var(--border-hi);
+        border-radius: var(--r-xl); box-shadow: var(--sh-lg);
+      }
+      .panel-bar {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 18px 0;
+      }
+      .win-dots { display: flex; gap: 6px; }
+      .win-dots span { width: 10px; height: 10px; border-radius: 999px; }
+      .win-dots span:nth-child(1) { background: #f87171; }
+      .win-dots span:nth-child(2) { background: #facc15; }
+      .win-dots span:nth-child(3) { background: #22c55e; }
+      .panel-tag {
+        font-size: .73rem; font-weight: 700;
+        color: var(--primary); background: var(--primary-lt);
+        border: 1px solid rgba(99,102,241,.15);
+        border-radius: 999px; padding: 4px 10px;
+      }
+      .dash-card {
+        margin: 14px; padding: clamp(14px,3vw,20px);
+        background: var(--bg3); border: 1px solid var(--border);
+        border-radius: 18px;
+      }
+      .dash-lbl {
+        font-size: .72rem; font-weight: 700;
+        letter-spacing: .07em; text-transform: uppercase;
+        color: var(--muted); margin-bottom: 7px;
+      }
+      .dash-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(1.3rem,3.5vw,1.85rem);
+        font-weight: 800; letter-spacing: -.04em;
+        color: var(--ink); margin-bottom: 13px;
+      }
+      .usage-bar { height: 8px; border-radius: 999px; background: var(--dim); overflow: hidden; }
+      .usage-fill { height: 100%; width: 85%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+      .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 13px; }
+      .mini-card {
+        padding: 13px; background: var(--bg2);
+        border: 1px solid var(--border); border-radius: 14px;
+      }
+      .mini-val {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.4rem; font-weight: 800;
+        letter-spacing: -.04em; color: var(--primary);
+        line-height: 1; margin-bottom: 4px;
+      }
+      .mini-desc { font-size: .79rem; color: var(--muted); line-height: 1.4; }
+      .float-card {
+        display: flex; align-items: center; gap: 12px;
+        margin: 0 14px 14px; margin-inline-start: auto;
+        width: min(280px, 100%); padding: 13px;
+        background: var(--bg3); border: 1px solid rgba(34,197,94,.18);
+        border-radius: 16px; box-shadow: 0 8px 26px rgba(34,197,94,.1);
+      }
+      .float-icon {
+        width: 38px; height: 38px; flex-shrink: 0;
+        background: linear-gradient(135deg, #16a34a, var(--accent));
+        border-radius: 11px; display: grid; place-items: center;
+      }
+      .float-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .float-txt strong { display: block; font-size: .83rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+      .float-txt p { font-size: .77rem; color: var(--muted); line-height: 1.4; }
+
+      /* ── SECTIONS ── */
+      .section { padding: clamp(52px,8vw,92px) 0; }
+      .kicker {
+        display: inline-block;
+        font-size: .71rem; font-weight: 700;
+        letter-spacing: .1em; text-transform: uppercase;
+        color: var(--primary); background: var(--primary-lt);
+        border: 1px solid rgba(99,102,241,.16);
+        border-radius: 999px; padding: 5px 12px; margin-bottom: 11px;
+      }
+      .sec-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(1.85rem, 4.5vw, 2.8rem);
+        font-weight: 800; letter-spacing: -.055em; line-height: 1.05;
+        color: var(--ink); margin-bottom: 10px;
+      }
+      .sec-sub {
+        font-size: .97rem; color: var(--ink2);
+        line-height: 1.74; max-width: 56ch;
+      }
+
+      /* ── PRODUCTS ── */
+      .products-grid {
+        display: grid; grid-template-columns: 1fr;
+        gap: 15px; margin-top: 1.8rem;
+      }
+      @media (min-width: 720px)  { .products-grid { grid-template-columns: repeat(2,1fr); } }
+      @media (min-width: 960px)  { .products-grid { grid-template-columns: repeat(3,1fr); } }
+
+      .price-card {
+        position: relative; overflow: hidden;
+        display: flex; flex-direction: column;
+        padding: 22px;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-lg); box-shadow: var(--sh-sm);
+        transition: transform .22s, box-shadow .22s, border-color .22s;
+      }
+      .price-card::before {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(circle at 95% 5%, rgba(99,102,241,.06), transparent 48%);
+      }
+      .price-card:hover { transform: translateY(-5px); box-shadow: var(--sh-md); border-color: var(--border-hi); }
+
+      .price-card.featured {
+        background: linear-gradient(148deg, #0d0c1a 0%, #1e1b4b 52%, #312e81 100%);
+        border-color: rgba(99,102,241,.3);
+        box-shadow: 0 24px 64px rgba(79,70,229,.25);
+      }
+      @media (min-width: 960px) {
+        .price-card.featured { transform: translateY(-8px); }
+        .price-card.featured:hover { transform: translateY(-14px); }
+      }
+      .price-card.featured::before { background: radial-gradient(circle at 82% 0%, rgba(34,197,94,.15), transparent 48%); }
+
+      .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+      .card-badge {
+        display: inline-flex; align-items: center;
+        padding: 4px 10px; border-radius: 999px;
+        font-size: .72rem; font-weight: 700;
+        background: var(--primary-lt); color: #818cf8;
+      }
+      .featured .card-badge { background: rgba(255,255,255,.1); color: #c7d2fe; border: 1px solid rgba(255,255,255,.16); }
+      .card-dur {
+        font-size: .79rem; font-weight: 600; color: var(--muted);
+        background: var(--bg3); border-radius: 999px; padding: 4px 10px;
+      }
+      .featured .card-dur { background: rgba(255,255,255,.08); color: #a5b4fc; }
+
+      .card-name {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em;
+        color: var(--ink); margin-bottom: 8px;
+      }
+      .card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 7px; }
+      .price-num {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 2.2rem; font-weight: 800;
+        letter-spacing: -.07em; color: var(--ink); line-height: 1;
+      }
+      .featured .price-num { color: #fff; }
+      .price-per { font-size: .82rem; font-weight: 500; color: var(--muted); }
+      .featured .price-per { color: #a5b4fc; }
+
+      .card-highlight { font-size: .87rem; font-weight: 600; color: var(--primary); margin-bottom: 9px; }
+      .featured .card-highlight { color: #86efac; }
+
+      .card-desc { font-size: .85rem; line-height: 1.66; color: var(--ink2); }
+      .featured .card-desc { color: #c7d2fe; }
+
+      .feature-list {
+        list-style: none; display: grid; gap: 8px;
+        margin: 16px 0 18px; padding-top: 15px;
+        border-top: 1px solid var(--border);
+        margin-top: auto;
+      }
+      .featured .feature-list { border-color: rgba(255,255,255,.1); }
+      .feature-list li {
+        display: flex; align-items: center; gap: 9px;
+        font-size: .85rem; line-height: 1.4; color: var(--ink2);
+      }
+      .featured .feature-list li { color: #dde4ff; }
+      .feat-dot {
+        width: 17px; height: 17px; flex-shrink: 0;
+        border-radius: 999px; background: var(--primary-lt);
+        display: grid; place-items: center;
+      }
+      .feat-dot::after {
+        content: ''; width: 6px; height: 6px;
+        border-radius: 999px; background: var(--primary);
+      }
+      .featured .feat-dot { background: rgba(34,197,94,.18); }
+      .featured .feat-dot::after { background: var(--accent); }
+
+      /* ── IDE CONNECT SECTION ── */
+      .ide-section { padding: clamp(52px,8vw,92px) 0; }
+      .ide-marquee-wrap {
+        overflow: hidden;
+        margin-top: 1.8rem;
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      }
+      .ide-marquee-track {
+        display: flex;
+        gap: 12px;
+        width: max-content;
+        animation: ide-scroll 35s linear infinite;
+      }
+      .ide-marquee-wrap:hover .ide-marquee-track {
+        animation-play-state: paused;
+      }
+      @keyframes ide-scroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .ide-card {
+        flex-shrink: 0;
+        width: 220px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 16px 18px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        box-shadow: var(--sh-sm);
+        position: relative;
+        overflow: hidden;
+      }
+      .ide-icon {
+        width: 40px; height: 40px; flex-shrink: 0;
+        border-radius: 10px; overflow: hidden;
+        display: grid; place-items: center;
+        background: rgba(255,255,255,0.05);
+        padding: 4px;
+      }
+      .ide-icon svg, .ide-icon img {
+        width: 32px; height: 32px;
+        object-fit: contain;
+      }
+      .ide-info { min-width: 0; }
+      .ide-name {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: .93rem; font-weight: 800; letter-spacing: -.02em;
+        color: var(--ink); line-height: 1.2; margin-bottom: 2px;
+      }
+      .ide-desc { font-size: .77rem; color: var(--muted); }
+      .ide-badge {
+        margin-left: auto; flex-shrink: 0;
+        font-size: .67rem; font-weight: 700; letter-spacing: .06em;
+        text-transform: uppercase; color: var(--accent);
+        background: var(--accent-lt); border-radius: 999px;
+        padding: 3px 8px; white-space: nowrap;
+      }
+
+      .ide-cta-row {
+        display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+        gap: 1rem; margin-top: 1.6rem;
+        padding: 20px 24px;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-md);
+      }
+      .ide-cta-txt strong { display: block; font-size: .94rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+      .ide-cta-txt p { font-size: .84rem; color: var(--ink2); }
+
+      @media (max-width: 767px) {
+        .ide-marquee-wrap {
+          overflow: visible;
+          mask-image: none;
+          -webkit-mask-image: none;
+        }
+        .ide-marquee-track {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          width: 100%;
+          animation: none;
+          flex-wrap: unset;
+        }
+        .ide-marquee-track .ide-card:nth-child(n+15) {
+          display: none;
+        }
+        .ide-card {
+          width: 100%;
+        }
+      }
+      @media (min-width: 768px) {
+        .ide-marquee-wrap {
+          overflow: hidden;
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .ide-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: ide-scroll 35s linear infinite;
+        }
+        .ide-card {
+          width: 220px;
+          flex-shrink: 0;
+        }
+      }
+
+      /* ── QUICK START SECTION ── */
+      .quick-start-section { padding: 80px 0; }
+      .quick-start-inner { max-width: 1100px; margin: 0 auto; }
+      .qs-panel {
+        margin-top: 1.9rem;
+        background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: var(--r-xl);
+        box-shadow: var(--sh-md);
+        overflow: hidden;
+      }
+      .qs-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 16px;
+        background: rgba(255,255,255,.018);
+        border-bottom: 1px solid var(--border);
+      }
+      .qs-tab {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--ink2);
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+        transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+      }
+      .qs-tab:hover { border-color: var(--border-hi); transform: translateY(-1px); }
+      .qs-tab.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 12px 28px rgba(99,102,241,.28);
+      }
+      .qs-content-wrap { position: relative; padding: 22px; }
+      .qs-content {
+        display: none;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity .25s ease, transform .25s ease;
+      }
+      .qs-content.active {
+        display: grid;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .qs-step {
+        min-height: 100%;
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr);
+        align-content: start;
+        column-gap: 12px;
+        row-gap: 8px;
+        padding: 18px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+      }
+      .qs-step-num {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--primary) 20%, transparent);
+        color: var(--primary);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .72rem;
+        font-weight: 800;
+      }
+      .qs-step h3,
+      .qs-step p,
+      .qs-step .qs-download-btn,
+      .qs-step .qs-note,
+      .qs-step .qs-code { grid-column: 2; }
+      .qs-step h3 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1rem;
+        line-height: 1.25;
+        letter-spacing: -.025em;
+        color: var(--ink);
+        margin-bottom: 0;
+      }
+      .qs-step p { color: var(--ink2); font-size: .86rem; line-height: 1.62; }
+      .qs-download-btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--primary);
+        color: #fff;
+        font-size: .84rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      }
+      .qs-download-btn:hover {
+        transform: translateY(-2px);
+        background: var(--primary-dk);
+        box-shadow: 0 12px 26px rgba(99,102,241,.28);
+      }
+      .qs-download-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+      .qs-note { display: block; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+      .qs-code {
+        position: relative;
+        margin-top: 2px;
+        padding: 12px 96px 12px 16px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      .qs-code code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .875rem;
+        color: var(--ink2);
+        white-space: nowrap;
+      }
+      .qs-copy {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 9px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg2);
+        color: var(--ink2);
+        font: inherit;
+        font-size: .72rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: border-color .2s ease, color .2s ease, background .2s ease;
+      }
+      .qs-copy svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; }
+      .qs-copy:hover { border-color: var(--border-hi); color: var(--ink); background: var(--bg); }
+      .qs-tools { margin-top: 2.6rem; }
+      .qs-tools-head { display: flex; flex-direction: column; gap: 7px; margin-bottom: 1.2rem; }
+      .qs-tools-head h3 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(1.45rem, 3vw, 2rem);
+        line-height: 1.08;
+        letter-spacing: -.045em;
+        color: var(--ink);
+      }
+      .qs-tools-head p { max-width: 620px; color: var(--ink2); line-height: 1.65; }
+      .qs-tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+      }
+      .qs-tool-card {
+        --tool-accent: var(--primary);
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--tool-accent);
+        border-radius: 12px;
+        transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      }
+      .qs-tool-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-hi);
+        box-shadow: var(--sh-sm);
+      }
+      .qs-tool-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 13px;
+        background: color-mix(in srgb, var(--tool-accent) 16%, transparent);
+      }
+      .qs-tool-icon img, .qs-tool-icon svg { width: 48px; height: 48px; object-fit: contain; }
+      .qs-tool-icon svg { display: block; }
+      .qs-tool-name {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: -.025em;
+        color: var(--ink);
+      }
+      .qs-tool-desc { min-height: 42px; color: var(--ink2); font-size: .85rem; line-height: 1.55; }
+      .qs-tool-badge {
+        width: fit-content;
+        margin-top: auto;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: var(--bg3);
+        color: var(--muted);
+        font-size: .7rem;
+        font-weight: 800;
+      }
+      .qs-tool-link {
+        width: fit-content;
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 2px;
+        color: var(--tool-accent);
+        font-size: .82rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .qs-tool-link:hover { text-decoration: underline; }
+
+      @media (max-width: 860px) {
+        .qs-content { grid-template-columns: 1fr; }
+        .qs-step { padding: 16px; }
+      }
+      @media (max-width: 560px) {
+        .quick-start-section { padding: 64px 0; }
+        .qs-panel { border-radius: var(--r-lg); }
+        .qs-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px; }
+        .qs-tab { width: 100%; padding: 9px 10px; font-size: .84rem; }
+        .qs-content-wrap { padding: 14px; }
+        .qs-code { padding-right: 14px; padding-bottom: 52px; }
+        .qs-copy { top: auto; right: 10px; bottom: 10px; }
+        .qs-tools-grid { grid-template-columns: 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .qs-tab,
+        .qs-content,
+        .qs-download-btn,
+        .qs-tool-card { transition: none; }
+        .qs-tab:hover,
+        .qs-download-btn:hover,
+        .qs-tool-card:hover { transform: none; }
+      }
+
+      /* ── PLAYGROUND SECTION ── */
+      .playground-section { padding: clamp(52px,8vw,92px) 0; }
+      .playground-wrap {
+        margin-top: 1.8rem;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-xl); overflow: hidden;
+        box-shadow: var(--sh-md);
+      }
+      .pg-topbar {
+        display: flex; align-items: center; gap: 10px;
+        padding: 13px 18px;
+        background: var(--bg3); border-bottom: 1px solid var(--border);
+      }
+      .pg-dots { display: flex; gap: 5px; }
+      .pg-dots span { width: 10px; height: 10px; border-radius: 999px; }
+      .pg-dots span:nth-child(1) { background: #f87171; }
+      .pg-dots span:nth-child(2) { background: #facc15; }
+      .pg-dots span:nth-child(3) { background: #22c55e; }
+      .pg-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .78rem; color: var(--muted); margin-left: 4px;
+      }
+      .pg-badge {
+        margin-left: auto;
+        font-size: .7rem; font-weight: 700;
+        color: var(--primary); background: var(--primary-lt);
+        border: 1px solid rgba(99,102,241,.18);
+        border-radius: 999px; padding: 3px 9px;
+      }
+      .pg-body {
+        display: grid; gap: 0;
+      }
+      @media (min-width: 768px) { .pg-body { grid-template-columns: 1fr 1fr; } }
+
+      .pg-editor {
+        padding: 20px 22px;
+        border-right: 1px solid var(--border);
+      }
+      .pg-editor-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .7rem; color: var(--muted); margin-bottom: 10px;
+        text-transform: uppercase; letter-spacing: .08em;
+      }
+      .pg-textarea {
+        width: 100%; min-height: 130px;
+        background: var(--bg); border: 1px solid var(--border);
+        border-radius: var(--r-md); padding: 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .82rem; color: var(--ink2); line-height: 1.65;
+        resize: vertical; outline: none;
+        transition: border-color .2s;
+      }
+      .pg-textarea:focus { border-color: var(--primary); }
+      .pg-textarea::placeholder { color: var(--muted); }
+
+      .pg-actions {
+        display: flex; align-items: center; gap: 9px;
+        margin-top: 12px; flex-wrap: wrap;
+      }
+      .pg-model-sel {
+        background: var(--bg3); border: 1px solid var(--border);
+        border-radius: 999px; padding: 7px 13px;
+        font-family: inherit; font-size: .82rem; color: var(--ink2);
+        outline: none; cursor: pointer;
+        transition: border-color .2s;
+      }
+      .pg-model-sel:focus { border-color: var(--primary); }
+      .pg-model-sel option { background: var(--bg2); }
+
+      .pg-counter {
+        font-size: .78rem; color: var(--muted);
+        font-family: 'JetBrains Mono', monospace;
+        margin-left: auto;
+      }
+      .pg-counter span { color: var(--accent); font-weight: 600; }
+
+      .pg-output {
+        padding: 20px 22px;
+        display: flex; flex-direction: column;
+      }
+      .pg-output-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .7rem; color: var(--muted); margin-bottom: 10px;
+        text-transform: uppercase; letter-spacing: .08em;
+      }
+      .pg-result {
+        flex: 1; min-height: 130px;
+        background: var(--bg); border: 1px solid var(--border);
+        border-radius: var(--r-md); padding: 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .82rem; color: var(--ink2); line-height: 1.65;
+        white-space: pre-wrap; word-break: break-word;
+        overflow-y: auto;
+      }
+      .pg-result.loading { color: var(--muted); font-style: italic; }
+      .pg-result.error   { color: #f87171; }
+
+      .pg-footer {
+        padding: 18px 22px;
+        background: var(--bg3); border-top: 1px solid var(--border);
+        display: flex; align-items: center; flex-wrap: wrap; gap: 14px;
+      }
+      .pg-trial-info {
+        display: flex; align-items: center; gap: 10px;
+      }
+      .pg-trial-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .76rem; color: var(--accent);
+        background: var(--accent-lt);
+        border: 1px solid rgba(34,197,94,.2);
+        border-radius: 999px; padding: 4px 11px;
+      }
+      .pg-trial-text { font-size: .84rem; color: var(--ink2); }
+      .pg-trial-text strong { color: var(--ink); }
+
+      .model-catalog-wrap {
+        margin-top: 1.6rem;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: var(--r-xl);
+        overflow: hidden;
+      }
+      .model-search-row {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .model-search-input {
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        padding: 10px 14px;
+        font-family: inherit;
+        font-size: .88rem;
+        color: var(--ink);
+        outline: none;
+        transition: border-color .2s;
+      }
+      .model-search-input:focus { border-color: var(--primary); }
+      .model-search-input::placeholder { color: var(--muted); }
+      .model-filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      .mpill {
+        padding: 5px 13px;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: .78rem;
+        font-weight: 600;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--muted);
+        cursor: pointer;
+        transition: background .18s, color .18s, border-color .18s;
+      }
+      .mpill:hover { color: var(--ink); border-color: var(--border-hi); }
+      .mpill.active {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border-color: rgba(99,102,241,.3);
+      }
+      .model-list {
+        max-height: 420px;
+        overflow-y: auto;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 8px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--dim) transparent;
+      }
+      .model-list::-webkit-scrollbar { width: 6px; }
+      .model-list::-webkit-scrollbar-track { background: transparent; }
+      .model-list::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 999px; }
+      .model-item {
+        padding: 11px 14px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: border-color .18s;
+      }
+      .model-item:hover { border-color: var(--border-hi); }
+      .model-dot {
+        width: 8px; height: 8px;
+        border-radius: 999px;
+        flex-shrink: 0;
+      }
+      .model-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .78rem;
+        color: var(--ink2);
+        line-height: 1.4;
+        word-break: break-all;
+      }
+      .model-empty {
+        padding: 40px;
+        text-align: center;
+        color: var(--muted);
+        font-size: .88rem;
+      }
+
+      /* ── STEPS ── */
+      .steps-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 1.8rem; }
+      @media (min-width: 720px) { .steps-grid { grid-template-columns: repeat(3,1fr); } }
+      .step-card {
+        position: relative; overflow: hidden;
+        padding: 22px;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-lg); box-shadow: var(--sh-sm);
+      }
+      .step-card::after {
+        content: ''; position: absolute; top:-50px; right:-50px;
+        width: 120px; height: 120px; border-radius: 999px;
+        background: rgba(99,102,241,.04); pointer-events: none;
+      }
+      .step-num {
+        width: 42px; height: 42px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary-dk), var(--accent));
+        display: grid; place-items: center;
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: .98rem; font-weight: 800; color: #fff;
+        margin-bottom: 13px; box-shadow: 0 7px 18px rgba(99,102,241,.2);
+      }
+      .step-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 800; color: var(--ink); margin-bottom: 7px; }
+      .step-desc { font-size: .85rem; line-height: 1.66; color: var(--ink2); }
+
+      /* ── TRUST ── */
+      .trust-shell {
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-md);
+      }
+      .trust-inner {
+        display: grid; gap: 2rem; padding: clamp(22px,4vw,44px);
+      }
+      @media (min-width: 960px) { .trust-inner { grid-template-columns: .88fr 1.12fr; align-items: center; } }
+      .trust-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      @media (min-width: 560px) { .trust-grid { grid-template-columns: repeat(3,1fr); } }
+      .trust-card {
+        padding: 18px; background: var(--bg3);
+        border: 1px solid var(--border); border-radius: var(--r-md);
+      }
+      .trust-icon {
+        width: 40px; height: 40px;
+        background: linear-gradient(135deg, var(--primary-dk), var(--accent));
+        border-radius: 12px; display: grid; place-items: center;
+        margin-bottom: 11px; box-shadow: 0 6px 14px rgba(99,102,241,.2);
+      }
+      .trust-icon svg { width: 19px; height: 19px; stroke: #fff; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .trust-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: .92rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+      .trust-desc { font-size: .83rem; line-height: 1.62; color: var(--ink2); }
+
+      /* ── FAQ ── */
+      .faq-grid { display: grid; grid-template-columns: 1fr; gap: 11px; margin-top: 1.8rem; }
+      @media (min-width: 720px) { .faq-grid { grid-template-columns: repeat(2,1fr); } }
+      .faq-item {
+        padding: 20px 22px;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: var(--r-md); box-shadow: var(--sh-sm);
+      }
+      .faq-q { font-family: 'Plus Jakarta Sans', sans-serif; font-size: .96rem; font-weight: 700; color: var(--ink); margin-bottom: 7px; }
+      .faq-a { font-size: .85rem; line-height: 1.68; color: var(--ink2); }
+
+      /* ── CTA ── */
+      .cta-wrap { padding: 0 0 clamp(56px,8vw,92px); }
+      .cta-card {
+        position: relative; overflow: hidden;
+        display: grid; gap: 1.5rem; align-items: center;
+        padding: clamp(28px,4vw,52px);
+        border-radius: var(--r-xl);
+        background: linear-gradient(138deg, #080810 0%, #1e1b4b 42%, #312e81 78%, #3730a3 100%);
+        box-shadow: 0 24px 80px rgba(79,70,229,.22);
+        border: 1px solid rgba(99,102,241,.2);
+      }
+      @media (min-width: 768px) { .cta-card { grid-template-columns: 1fr auto; } }
+      .cta-card::before {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(ellipse 58% 75% at 100% 0%, rgba(34,197,94,.14), transparent 50%);
+      }
+      .cta-card::after {
+        content: ''; position: absolute; inset: 1px; pointer-events: none;
+        border-radius: calc(var(--r-xl) - 1px);
+        border: 1px solid rgba(255,255,255,.07);
+      }
+      .cta-text { position: relative; z-index: 1; }
+      .cta-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(1.75rem, 4vw, 2.65rem);
+        font-weight: 800; letter-spacing: -.055em;
+        color: #fff; line-height: 1.06; margin-bottom: 9px;
+      }
+      .cta-sub { font-size: .96rem; line-height: 1.68; color: #c7d2fe; max-width: 52ch; }
+      .cta-act { position: relative; z-index: 1; }
+
+      /* ── FOOTER ── */
+      .site-footer { border-top: 1px solid var(--border); padding: 22px 0; }
+      .footer-inner {
+        display: flex; flex-wrap: wrap;
+        align-items: center; justify-content: space-between; gap: 12px;
+      }
+      .footer-copy { font-size: .82rem; color: var(--muted); }
+      .footer-link { font-size: .82rem; font-weight: 600; color: var(--primary); transition: color .18s; }
+      .footer-link:hover { color: #818cf8; }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 719px) {
+        .nav-pill { display: none; }
+        .stats-row { grid-template-columns: 1fr; }
+        .hero-actions .btn { flex: 1; min-width: 130px; }
+        .pg-editor { border-right: none; border-bottom: 1px solid var(--border); }
+      }
+      @media (max-width: 500px) {
+        .container { width: min(100% - 24px, 1160px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: .01ms !important;
+          transition-duration: .01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" onfocus="this.style.cssText='position:fixed;top:8px;left:8px;width:auto;height:auto;padding:8px 16px;background:#131317;color:#f0eff6;z-index:9999;border-radius:8px'">
+      Lewati ke konten utama
+    </a>
+
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#main-content" aria-label="HeBit beranda">
+          <div>
+            <div class="brand-wordmark"><span>He</span>Bit</div>
+            <div class="brand-sub">API Catalog</div>
+          </div>
+        </a>
+
+        <nav class="nav-pill" aria-label="Navigasi utama">
+          {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        </nav>
+
+        <a class="btn btn-green" href={consultLink} target="_blank" rel="noreferrer">
+          Chat WA
+          <svg viewBox="0 0 20 20"><path d="M7.5 4.5L13 10L7.5 15.5"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main id="main-content">
+
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Akses API cepat, katalog simple
+            </p>
+            <h1 id="hero-title" class="hero-title">
+              Katalog API yang<br />
+              <span class="gradient-text">langsung siap order.</span>
+            </h1>
+            <p class="hero-sub">
+              HeBit menyediakan pilihan paket akses API harian, mingguan, sampai bulanan.
+              Pilih paket, klik tombol beli, lalu transaksi langsung via WhatsApp tanpa checkout ribet.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-green btn-lg" href="#produk">
+                Lihat Paket
+                <svg viewBox="0 0 20 20"><path d="M10 4V16M10 16L5.5 11.5M10 16L14.5 11.5"/></svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#playground">Coba Gratis</a>
+            </div>
+            <div class="hero-badges">
+              <span class="badge-pill">Limit unlimited</span>
+              <span class="badge-pill">All model premium</span>
+              <span class="badge-pill">Connect ke IDE favoritmu</span>
+            </div>
+            <div class="stats-row">
+              {stats.map((s) => (
+                <div class="stat-card">
+                  <div class="stat-val">{s.value}</div>
+                  <div class="stat-lbl">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="hero-panel-wrap" aria-hidden="true">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="hero-panel">
+              <div class="panel-bar">
+                <div class="win-dots"><span></span><span></span><span></span></div>
+                <span class="panel-tag">HeBit Live Catalog</span>
+              </div>
+              <div class="dash-card">
+                <p class="dash-lbl">Paket populer</p>
+                <h2 class="dash-title">Mingguan All Model</h2>
+                <div class="usage-bar"><div class="usage-fill"></div></div>
+                <div class="mini-grid">
+                  <div class="mini-card">
+                    <div class="mini-val">Rp80k</div>
+                    <div class="mini-desc">akses 7 hari, limit unlimited</div>
+                  </div>
+                  <div class="mini-card">
+                    <div class="mini-val">All</div>
+                    <div class="mini-desc">termasuk Claude Opus 3.7</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section id="produk" class="section" aria-labelledby="produk-title">
+        <div class="container">
+          <p class="kicker">Paket Produk</p>
+          <h2 id="produk-title" class="sec-title">Pilih durasi yang paling pas.</h2>
+          <p class="sec-sub">Mulai dari akses singkat untuk testing sampai paket bulanan yang lebih hemat untuk pemakaian rutin.</p>
+
+          <div class="products-grid">
+            {products.map((p) => (
+              <article class={`price-card ${p.featured ? "featured" : ""}`} aria-label={`Paket ${p.name}`}>
+                <div class="card-header">
+                  <span class="card-badge">{p.badge}</span>
+                  <span class="card-dur">{p.duration}</span>
+                </div>
+                <h3 class="card-name">{p.name}</h3>
+                <div class="card-price">
+                  <span class="price-num">{p.priceShort}</span>
+                  <span class="price-per">/{p.shortName.toLowerCase()}</span>
+                </div>
+                <p class="card-highlight">{p.highlight}</p>
+                <p class="card-desc">{p.description}</p>
+                <ul class="feature-list" aria-label={`Benefit ${p.name}`}>
+                  {p.features.map((f) => (
+                    <li><span class="feat-dot"></span>{f}</li>
+                  ))}
+                </ul>
+                <a
+                  class={`btn btn-full ${p.featured ? "btn-green" : "btn-primary"}`}
+                  href={createWhatsAppLink(p.name, p.price)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Beli ${p.name}`}
+                >
+                  Beli
+                  <svg viewBox="0 0 20 20"><path d="M7.5 4.5L13 10L7.5 15.5"/></svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- IDE CONNECT -->
+      <section id="ide-connect" class="ide-section" aria-labelledby="ide-title">
+        <div class="container">
+          <p class="kicker">IDE Connect</p>
+          <h2 id="ide-title" class="sec-title">Konek ke IDE favoritmu.</h2>
+          <p class="sec-sub">API HeBit kompatibel dengan semua IDE dan editor populer. Cukup ganti base URL dan API key — langsung jalan tanpa konfigurasi rumit.</p>
+
+          <div class="ide-marquee-wrap">
+            <div class="ide-marquee-track">
+              {[...ides, ...ides].map((ide, i) => (
+                <div class="ide-card" style={`--ide-glow: ${ide.color}18`}>
+                  <div class="ide-icon" set:html={ide.icon} />
+                  <div class="ide-info">
+                    <div class="ide-name">{ide.name}</div>
+                    <div class="ide-desc">{ide.desc}</div>
+                  </div>
+                  <span class="ide-badge">Ready</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="ide-cta-row">
+            <div class="ide-cta-txt">
+              <strong>Butuh bantuan setup di IDE kamu?</strong>
+              <p>Admin HeBit siap bantu konfigurasi langkah demi langkah via WhatsApp.</p>
+            </div>
+            <a class="btn btn-ghost" href={consultLink} target="_blank" rel="noreferrer">
+              Tanya Setup
+              <svg viewBox="0 0 20 20"><path d="M7.5 4.5L13 10L7.5 15.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK START -->
+      <section id="quick-start" class="quick-start-section" aria-labelledby="quick-start-title">
+        <div class="container quick-start-inner">
+          <p class="kicker">Quick Start</p>
+          <h2 id="quick-start-title" class="sec-title">Mulai dalam Hitungan Menit</h2>
+          <p class="sec-sub">Pilih OS kamu, ikuti langkahnya, dan API HeBit langsung siap di editor favoritmu.</p>
+
+          <div class="qs-panel">
+            <div class="qs-tabs" role="tablist" aria-label="Quick start OS selector">
+              <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-win" id="qs-tab-win" data-os="windows">Windows</button>
+              <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-mac" id="qs-tab-mac" data-os="mac">macOS</button>
+              <button class="qs-tab" role="tab" aria-selected="false" aria-controls="qs-linux" id="qs-tab-linux" data-os="linux">Linux</button>
+            </div>
+
+            <div class="qs-content" id="qs-win" role="tabpanel" aria-labelledby="qs-tab-win">
+<article class="qs-step">
+  <span class="qs-step-num">01</span>
+  <h3>Download Installer</h3>
+  <a class="qs-download-btn" href="/scripts/hebit-windows-installer.zip" download>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8.5 10.5L12 14l3.5-3.5M5 18h14"/></svg>
+    Download Installer (.zip)
+  </a>
+  <small class="qs-note">Download zip, ekstrak, lalu jalankan installer dari terminal.</small>
+</article>
+<article class="qs-step">
+  <span class="qs-step-num">02</span>
+  <h3>Jalankan Installer</h3>
+  <p style="margin-bottom:8px;font-size:0.875rem;color:var(--ink2);">
+    Ekstrak ZIP, lalu klik kanan <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">HeBit-Windows-Setup.bat</code>
+    → <strong>Run as Administrator</strong>
+  </p>
+  <small class="qs-note">
+    Kalau muncul popup "Windows protected your PC" → klik <strong>More info</strong> → <strong>Run anyway</strong>. Ini normal untuk installer tanpa digital signature.
+  </small>
+</article>
+<article class="qs-step">
+  <span class="qs-step-num">03</span>
+  <h3>Selesai setup</h3>
+  <p>Buka editor, HeBit sudah siap digunakan.</p>
+</article>
+</div>
+
+              <div class="qs-content" id="qs-mac" role="tabpanel" aria-labelledby="qs-tab-mac">
+                <article class="qs-step">
+                  <span class="qs-step-num">01</span>
+                  <h3>Download script instalasi</h3>
+                  <!-- TODO: ganti URL script macOS -->
+                  <a class="qs-download-btn" href="#">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8.5 10.5L12 14l3.5-3.5M5 18h14"/></svg>
+                    Download Script (.sh)
+                  </a>
+                  <small class="qs-note">Script otomatis mendeteksi IDE dan mengkonfigurasi HeBit API.</small>
+                </article>
+                <article class="qs-step">
+                  <span class="qs-step-num">02</span>
+                  <h3>Jalankan di Terminal</h3>
+                  <div class="qs-code">
+                    <button class="qs-copy" data-copy="chmod +x hebit-setup.sh && ./hebit-setup.sh">Copy</button>
+                    <code>chmod +x hebit-setup.sh && ./hebit-setup.sh</code>
+                  </div>
+                </article>
+                <article class="qs-step">
+                  <span class="qs-step-num">03</span>
+                  <h3>Selesai setup</h3>
+                  <p>Buka editor, HeBit sudah siap digunakan.</p>
+                </article>
+              </div>
+
+              <div class="qs-content" id="qs-linux" role="tabpanel" aria-labelledby="qs-tab-linux">
+                <article class="qs-step">
+                  <span class="qs-step-num">01</span>
+                  <h3>Download installer</h3>
+                  <a class="qs-download-btn" href="/scripts/HeBit-Linux-Installer.zip" download>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8.5 10.5L12 14l3.5-3.5M5 18h14"/></svg>
+                    Download Installer (.zip)
+                  </a>
+                  <small class="qs-note">Download zip, ekstrak, lalu jalankan installer dari terminal.</small>
+                </article>
+                <article class="qs-step">
+                  <span class="qs-step-num">02</span>
+                  <h3>Jalankan di Terminal</h3>
+                  <div class="qs-code">
+                    <button class="qs-copy" data-copy="cd hebit-linux-installer && chmod +x HeBit-Linux-Setup.sh && ./HeBit-Linux-Setup.sh">Copy</button>
+                    <code>unzip HeBit-Linux-Installer-clean-ui.zip && cd hebit-linux-installer && chmod +x HeBit-Linux-Setup.sh && ./HeBit-Linux-Setup.sh</code>
+                  </div>
+                </article>
+                <article class="qs-step">
+                  <span class="qs-step-num">03</span>
+                  <h3>Selesai setup</h3>
+                  <p>Buka editor, HeBit sudah siap digunakan.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="qs-tools">
+            <div class="qs-tools-head">
+              <h3>Ekstensi & Tools yang Didukung</h3>
+              <p>HeBit API kompatibel dengan semua ekstensi AI coding populer.</p>
+            </div>
+
+            <div class="qs-tools-grid">
+              <article class="qs-tool-card" style="--tool-accent:#6366f1">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#6366f1"/><text x="12" y="15" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="700">R</text></svg></div>
+                <h4 class="qs-tool-name">Roo Code</h4>
+                <p class="qs-tool-desc">AI coding agent paling powerful, support custom API endpoint.</p>
+                <span class="qs-tool-badge">VS Code Extension</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#A78BFA">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#A78BFA"/><text x="12" y="16" text-anchor="middle" fill="white" font-size="12" font-family="Arial" font-weight="800">C</text></svg></div>
+                <h4 class="qs-tool-name">Cline</h4>
+                <p class="qs-tool-desc">Autonomous coding agent dengan tool use penuh di VS Code.</p>
+                <span class="qs-tool-badge">VS Code Extension</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#22c55e">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><polygon points="8,6 18,12 8,18" fill="#22c55e"/></svg></div>
+                <h4 class="qs-tool-name">Continue</h4>
+                <p class="qs-tool-desc">Open-source AI assistant, support semua model via OpenAI-compatible API.</p>
+                <span class="qs-tool-badge">VS Code + JetBrains</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#238636">
+                <div class="qs-tool-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/githubcopilot/238636" alt="GitHub Copilot" loading="lazy" /></div>
+                <h4 class="qs-tool-name">Copilot Chat (Custom)</h4>
+                <p class="qs-tool-desc">Arahkan GitHub Copilot ke HeBit API lewat konfigurasi custom endpoint.</p>
+                <span class="qs-tool-badge">VS Code Extension</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#F59E0B">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><text x="5" y="16" fill="#F59E0B" font-size="14" font-family="'JetBrains Mono', monospace" font-weight="700">></text></svg></div>
+                <h4 class="qs-tool-name">Aider</h4>
+                <p class="qs-tool-desc">AI pair programming di terminal, tinggal set OPENAI_API_BASE ke HeBit.</p>
+                <span class="qs-tool-badge">CLI Tool</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#22C55E">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0d1f12"/><path d="M5 8l4 4-4 4M11 16h8" stroke="#22C55E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h4 class="qs-tool-name">OpenCode</h4>
+                <p class="qs-tool-desc">Open-source CLI agent, kompatibel penuh dengan OpenAI-compatible API.</p>
+                <span class="qs-tool-badge">CLI Tool</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#8B5CF6">
+                <div class="qs-tool-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/cursor/8B5CF6" alt="Cursor" loading="lazy" /></div>
+                <h4 class="qs-tool-name">Cursor</h4>
+                <p class="qs-tool-desc">AI-first code editor, dukung custom model via OpenAI-compatible endpoint.</p>
+                <span class="qs-tool-badge">IDE</span>
+              </article>
+
+              <article class="qs-tool-card" style="--tool-accent:#06B6D4">
+                <div class="qs-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><text x="7" y="16" fill="#06B6D4" font-size="14" font-family="Arial" font-weight="700">~</text></svg></div>
+                <h4 class="qs-tool-name">Windsurf</h4>
+                <p class="qs-tool-desc">Agentic IDE dari Codeium, support custom base URL di settings model.</p>
+                <span class="qs-tool-badge">IDE</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLAYGROUND -->
+      <section id="playground" class="playground-section" aria-labelledby="playground-title">
+        <div class="container">
+          <p class="kicker">Web Playground</p>
+          <h2 id="playground-title" class="sec-title">Coba langsung di browser.</h2>
+          <p class="sec-sub">Ketik prompt, pilih model, klik Run — lihat sendiri seberapa cepat API HeBit merespons. Trial key gratis tersedia di bawah.</p>
+
+          <div class="playground-wrap">
+            <div class="pg-topbar">
+              <div class="pg-dots"><span></span><span></span><span></span></div>
+              <span class="pg-title">hebit demo</span>
+              <span class="pg-badge">Live Demo</span>
+            </div>
+            <div class="pg-body">
+              <div class="pg-editor">
+                <textarea
+                  id="pg-input"
+                  class="pg-textarea"
+                  placeholder="Tulis prompt kamu di sini... contoh: 'Jelaskan cara kerja API key dalam 3 poin singkat.'"
+                  rows="6"
+                ></textarea>
+                <div class="pg-actions">
+                  <select id="pg-model" class="pg-model-sel" aria-label="Pilih model">
+                    <optgroup label="GPT">
+                      <option value="cx/gpt-5.5-xhigh">GPT-5.5 XHigh</option>
+                      <option value="cx/gpt-5.5-high">GPT-5.5 High</option>
+                      <option value="cx/gpt-5.5-medium">GPT-5.5 Medium</option>
+                      <option value="cx/gpt-5.5-low">GPT-5.5 Low</option>
+                      <option value="cx/gpt-5.4">GPT-5.4</option>
+                      <option value="cx/gpt-5.2">GPT-5.2</option>
+                    </optgroup>
+                    <optgroup label="Claude">
+                      <option value="antigravity/claude-opus-4-6-thinking">Claude Opus 4.6 Thinking</option>
+                      <option value="antigravity/claude-sonnet-4-6">Claude Sonnet 4.6</option>
+                      <option value="kiro/claude-opus-4.7">Claude Opus 4.7</option>
+                      <option value="kiro/claude-sonnet-4.6">Claude Sonnet 4.6</option>
+                      <option value="kiro/claude-haiku-4.5">Claude Haiku 4.5</option>
+                    </optgroup>
+                    <optgroup label="Gemini">
+                      <option value="antigravity/gemini-3-pro-preview">Gemini 3 Pro</option>
+                      <option value="antigravity/gemini-3-flash-preview">Gemini 3 Flash</option>
+                      <option value="antigravity/gemini-3.1-pro-low">Gemini 3.1 Pro Low</option>
+                    </optgroup>
+                    <optgroup label="Lainnya">
+                      <option value="antigravity/gpt-oss-120b-medium">GPT OSS 120B</option>
+                      <option value="nvidia/deepseek-ai/deepseek-v4-pro">DeepSeek V4 Pro</option>
+                      <option value="groq/llama-3.3-70b-versatile" selected>Llama 3.3 70B (Fast)</option>
+                      <option value="nvidia/qwen/qwen3.5-397b-a17b">Qwen 3.5 397B</option>
+                    </optgroup>
+                  </select>
+                  <button id="pg-run" class="btn btn-primary">
+                    Run
+                    <svg viewBox="0 0 20 20"><polygon points="5,3 19,10 5,17" fill="currentColor" stroke="none"/></svg>
+                  </button>
+                  <span class="pg-counter">Sisa trial: <span id="pg-remaining">3</span> req</span>
+                </div>
+              </div>
+              <div class="pg-output">
+                <div id="pg-result" class="pg-result" aria-live="polite">Hasil akan muncul di sini setelah kamu klik Run...</div>
+              </div>
+            </div>
+            <div class="pg-footer">
+              <div class="pg-trial-info">
+                <span class="pg-trial-badge">Trial — 3 requests</span>
+                <span class="pg-trial-text">Mau lebih? <strong>Ambil trial key via WhatsApp</strong> untuk 20 request gratis.</span>
+              </div>
+              <a class="btn btn-green" href={trialLink} target="_blank" rel="noreferrer" style="margin-left:auto">
+                Ambil Trial Key
+                <svg viewBox="0 0 20 20"><path d="M7.5 4.5L13 10L7.5 15.5"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="semua-model" class="section" style="padding-top:0" aria-labelledby="model-title">
+        <div class="container">
+          <p class="kicker">Model Catalog</p>
+          <h2 id="model-title" class="sec-title">Semua model tersedia.</h2>
+          <p class="sec-sub">Ratusan model dari berbagai provider, semuanya bisa diakses lewat satu API key HeBit.</p>
+
+          <div class="model-catalog-wrap">
+            <div class="model-search-row">
+              <input
+                id="model-search"
+                type="search"
+                class="model-search-input"
+                placeholder="Cari model... contoh: claude, gemini, gpt"
+                aria-label="Cari model"
+              />
+              <div class="model-filter-pills">
+                <button class="mpill active" data-filter="all">Semua</button>
+                <button class="mpill" data-filter="gpt">GPT</button>
+                <button class="mpill" data-filter="claude">Claude</button>
+                <button class="mpill" data-filter="gemini">Gemini</button>
+                <button class="mpill" data-filter="llama">Llama</button>
+                <button class="mpill" data-filter="deepseek">DeepSeek</button>
+                <button class="mpill" data-filter="qwen">Qwen</button>
+                <button class="mpill" data-filter="lainnya">Lainnya</button>
+              </div>
+            </div>
+            <div id="model-list" class="model-list" role="list">
+              <!-- diisi JS -->
+            </div>
+            <div id="model-empty" class="model-empty" style="display:none">
+              Tidak ada model yang cocok dengan pencarianmu.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARA ORDER -->
+      <section id="cara-order" class="section" style="padding-top:0" aria-labelledby="order-title">
+        <div class="container">
+          <p class="kicker">Cara Order</p>
+          <h2 id="order-title" class="sec-title">Checkout sesimple chat admin.</h2>
+          <p class="sec-sub">Tidak perlu akun, cart, atau form panjang. Semua proses lanjut manual lewat WhatsApp agar cepat dan fleksibel.</p>
+
+          <div class="steps-grid">
+            <article class="step-card">
+              <div class="step-num">01</div>
+              <h3 class="step-title">Pilih Paket</h3>
+              <p class="step-desc">Pilih paket harian, mingguan, atau bulanan dari katalog sesuai kebutuhan kamu.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-num">02</div>
+              <h3 class="step-title">Klik Beli</h3>
+              <p class="step-desc">Pesan otomatis sudah terisi nama paket dan harga supaya admin langsung paham.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-num">03</div>
+              <h3 class="step-title">Konfirmasi & Aktivasi</h3>
+              <p class="step-desc">Setelah pembayaran dikonfirmasi, admin HeBit akan bantu proses aktivasi akses dan setup IDE.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENEFIT -->
+      <section id="trust" class="section" style="padding-top:0" aria-labelledby="trust-title">
+        <div class="container">
+          <div class="trust-shell">
+            <div class="trust-inner">
+              <div>
+                <p class="kicker">Benefit</p>
+                <h2 id="trust-title" class="sec-title" style="max-width:13ch">Kenapa order lewat HeBit?</h2>
+                <p class="sec-sub">Informasi paket jelas, CTA cepat, dan proses order minim friction.</p>
+              </div>
+              <div class="trust-grid">
+                {benefits.map((b) => (
+                  <div class="trust-card">
+                    <div class="trust-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" set:html={b.icon} />
+                    </div>
+                    <h3 class="trust-title">{b.title}</h3>
+                    <p class="trust-desc">{b.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section" style="padding-top:0" aria-labelledby="faq-title">
+        <div class="container">
+          <p class="kicker">FAQ</p>
+          <h2 id="faq-title" class="sec-title">Pertanyaan yang sering ditanyain.</h2>
+          <p class="sec-sub">Biar calon pembeli lebih yakin sebelum lanjut chat dan order paket.</p>
+          <div class="faq-grid">
+            {faqs.map((f) => (
+              <article class="faq-item">
+                <h3 class="faq-q">{f.question}</h3>
+                <p class="faq-a">{f.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-wrap" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-card">
+            <div class="cta-text">
+              <h2 id="cta-title" class="cta-title">Masih bingung pilih paket?</h2>
+              <p class="cta-sub">Chat admin HeBit dulu aja. Jelasin kebutuhanmu, nanti dibantu pilih paket yang paling masuk akal.</p>
+            </div>
+            <div class="cta-act">
+              <a class="btn btn-green btn-lg" href={consultLink} target="_blank" rel="noreferrer">
+                Konsultasi via WhatsApp
+                <svg viewBox="0 0 20 20"><path d="M7.5 4.5L13 10L7.5 15.5"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <small class="footer-copy">© {new Date().getFullYear()} HeBit. Katalog API & produk digital.</small>
+        <a class="footer-link" href="#produk">Kembali ke katalog</a>
+      </div>
+    </footer>
+
+    <script>
+      // ── Quick Start interaction logic ──
+      (() => {
+        const tabs = Array.from(document.querySelectorAll('.qs-tab')) as HTMLButtonElement[];
+        const panels = Array.from(document.querySelectorAll('.qs-content')) as HTMLDivElement[];
+        const copyButtons = Array.from(document.querySelectorAll('.qs-copy')) as HTMLButtonElement[];
+
+        if (tabs.length && panels.length) {
+          const userAgent = navigator.userAgent;
+          let defaultOs = 'linux';
+          if (userAgent.includes('Win')) defaultOs = 'windows';
+          else if (userAgent.includes('Mac')) defaultOs = 'mac';
+
+          const setActiveTab = (os: string) => {
+            tabs.forEach((tab) => {
+              const isActive = tab.dataset.os === os;
+              tab.classList.toggle('active', isActive);
+              tab.setAttribute('aria-selected', String(isActive));
+            });
+            panels.forEach((panel) => {
+              const shouldShow = panel.id === `qs-${os}`;
+              panel.classList.toggle('active', shouldShow);
+              panel.setAttribute('aria-hidden', String(!shouldShow));
+            });
+          };
+
+          setActiveTab(defaultOs);
+
+          tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+              const os = tab.dataset.os || 'linux';
+              setActiveTab(os);
+            });
+          });
+        }
+
+        copyButtons.forEach((btn) => {
+          const originalLabel = btn.textContent || 'Copy';
+          btn.addEventListener('click', async () => {
+            const copyText = btn.dataset.copy || '';
+            if (!copyText) return;
+            try {
+              await navigator.clipboard.writeText(copyText);
+              btn.textContent = 'Copied!';
+              btn.disabled = true;
+              setTimeout(() => {
+                btn.textContent = originalLabel;
+                btn.disabled = false;
+              }, 2000);
+            } catch {
+              btn.textContent = 'Failed';
+              setTimeout(() => { btn.textContent = originalLabel; }, 2000);
+            }
+          });
+        });
+      })();
+
+      // ── Playground live API logic ──
+      const PLAYGROUND_API_URL = "/api/chat";
+      const TRIAL_KEY = "hebit_trial_remaining";
+      const TRIAL_MAX = 3;
+
+      function getTrialLeft() {
+        const stored = localStorage.getItem(TRIAL_KEY);
+        if (stored === null) {
+          localStorage.setItem(TRIAL_KEY, String(TRIAL_MAX));
+          return TRIAL_MAX;
+        }
+
+        const parsed = parseInt(stored, 10);
+        if (Number.isNaN(parsed)) {
+          localStorage.setItem(TRIAL_KEY, String(TRIAL_MAX));
+          return TRIAL_MAX;
+        }
+
+        return Math.min(TRIAL_MAX, Math.max(0, parsed));
+      }
+
+      function decrementTrial() {
+        const current = getTrialLeft();
+        const next = Math.max(0, current - 1);
+        localStorage.setItem(TRIAL_KEY, String(next));
+        return next;
+      }
+
+      let trialLeft = getTrialLeft();
+
+      const inputEl    = document.getElementById('pg-input')    as HTMLTextAreaElement;
+      const resultEl   = document.getElementById('pg-result')   as HTMLDivElement;
+      const remainEl   = document.getElementById('pg-remaining') as HTMLSpanElement;
+      const runBtn     = document.getElementById('pg-run')       as HTMLButtonElement;
+      const modelEl    = document.getElementById('pg-model')     as HTMLSelectElement;
+      if (remainEl) remainEl.textContent = String(trialLeft);
+
+      runBtn?.addEventListener('click', async () => {
+        const prompt = inputEl?.value?.trim();
+        if (!prompt) {
+          resultEl.textContent = 'Tulis prompt dulu ya sebelum klik Run.';
+          resultEl.className = 'pg-result error';
+          return;
+        }
+        if (trialLeft <= 0) {
+          resultEl.textContent = 'Trial habis. Ambil trial key via WhatsApp untuk 20 request gratis, atau langsung beli paket!';
+          resultEl.className = 'pg-result error';
+          return;
+        }
+
+        resultEl.textContent = 'Memproses...';
+        resultEl.className = 'pg-result loading';
+        runBtn.disabled = true;
+
+        try {
+          const selectedModelLabel = modelEl?.selectedOptions?.[0]?.textContent?.trim() || "Llama 3.3 70B (Fast)";
+          const res = await fetch(PLAYGROUND_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt, displayModel: selectedModelLabel }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data?.error?.message || data?.error || "API error");
+
+          trialLeft = decrementTrial();
+          remainEl.textContent = String(trialLeft);
+          resultEl.textContent = data.choices?.[0]?.message?.content ?? "Tidak ada respons.";
+          resultEl.className = "pg-result";
+        } catch (err) {
+          const message = err instanceof Error ? err.message : "Unknown error";
+          resultEl.textContent = "Gagal: " + message;
+          resultEl.className = "pg-result error";
+        } finally {
+          runBtn.disabled = false;
+        }
+      });
+      (function() {
+        const ALL_MODELS = [
+          "cx/gpt-5.5-xhigh","cx/gpt-5.5-high","cx/gpt-5.5-medium","cx/gpt-5.5-low",
+          "cx/gpt-5.4","cx/gpt-5.4-mini","cx/gpt-5.3-codex-spark","cx/gpt-5.3-codex",
+          "cx/gpt-5.2","cx/gpt-5.5",
+          "antigravity/claude-opus-4-6-thinking","antigravity/claude-sonnet-4-6",
+          "antigravity/gemini-3-pro-preview","antigravity/gemini-3.1-pro-low",
+          "antigravity/gemini-3-flash-preview","antigravity/gpt-oss-120b-medium",
+          "antigravity/gemini-3-pro-image-preview","antigravity/gemini-3.1-flash-image",
+          "antigravity/gemini-2.5-computer-use-preview-10-2025",
+          "kiro/claude-opus-4.7","kiro/claude-opus-4.6","kiro/claude-sonnet-4.6",
+          "kiro/claude-sonnet-4.5","kiro/claude-haiku-4.5",
+          "groq/llama-3.3-70b-versatile",
+          "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
+          "groq/qwen/qwen3-32b","groq/openai/gpt-oss-120b",
+          "nvidia/z-ai/glm-5.1","nvidia/minimaxai/minimax-m2.7",
+          "nvidia/google/gemma-4-31b-it","nvidia/mistralai/mistral-small-4-119b-2603",
+          "nvidia/mistralai/mistral-large-3-675b-instruct-2512",
+          "nvidia/mistralai/devstral-2-123b-instruct-2512",
+          "nvidia/qwen/qwen3.5-397b-a17b","nvidia/qwen/qwen3.5-122b-a10b",
+          "nvidia/stepfun-ai/step-3.5-flash","nvidia/deepseek-ai/deepseek-v4-pro",
+          "nvidia/openai/gpt-oss-120b","nvidia/openai/gpt-oss-20b",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "sumopod/minimaxai/minimax-m2.7",
+          "nvidia/nv-embedqa-e5-v5","nvidia/nv-rerankqa-mistral-4b-v3",
+          "groq/whisper-large-v3","groq/whisper-large-v3-turbo",
+          "groq/distil-whisper-large-v3-en",
+          "nvidia/parakeet-ctc-1.1b-asr","nvidia/fastpitch","nvidia/tacotron2",
+        ];
+
+        const PROVIDER_COLORS: Record<string, string> = {
+          cx:          "#6366f1",
+          codex:       "#6366f1",
+          antigravity: "#4285F4",
+          kiro:        "#7c3aed",
+          groq:        "#f97316",
+          nvidia:      "#22c55e",
+          sumopod:     "#06b6d4",
+        };
+
+        function getDisplayName(id: string): string {
+          const raw = id.split("/").pop() || id;
+          const normalized = raw
+            .replace(/[_-]+/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+
+          const labelMap: Record<string, string> = {
+            ai: "AI",
+            api: "API",
+            asr: "ASR",
+            ctc: "CTC",
+            e5: "E5",
+            glm: "GLM",
+            gpt: "GPT",
+            it: "IT",
+            nv: "NV",
+            oss: "OSS",
+            qa: "QA",
+          };
+
+          return normalized
+            .split(" ")
+            .map((word) => {
+              const lower = word.toLowerCase();
+              if (labelMap[lower]) return labelMap[lower];
+              if (/^[a-z]+\d+(\.\d+)?$/i.test(word)) return word.replace(/^[a-z]+/, (prefix) => labelMap[prefix.toLowerCase()] || prefix.charAt(0).toUpperCase() + prefix.slice(1));
+              if (/^\d+[a-z]+$/i.test(word)) return word.toUpperCase();
+              return word.charAt(0).toUpperCase() + word.slice(1);
+            })
+            .join(" ");
+        }
+
+        function getProvider(id: string): string {
+          return id.split("/")[0];
+        }
+
+        function getFilter(id: string): string {
+          const name = id.toLowerCase();
+          if (name.includes("gpt") || name.includes("codex")) return "gpt";
+          if (name.includes("claude")) return "claude";
+          if (name.includes("gemini")) return "gemini";
+          if (name.includes("llama")) return "llama";
+          if (name.includes("deepseek")) return "deepseek";
+          if (name.includes("qwen")) return "qwen";
+          return "lainnya";
+        }
+
+        function renderModels(filter: string, search: string): void {
+          const list = document.getElementById("model-list") as HTMLDivElement | null;
+          const empty = document.getElementById("model-empty") as HTMLDivElement | null;
+          if (!list || !empty) return;
+
+          const filtered = ALL_MODELS.filter((id) => {
+            const name = getDisplayName(id).toLowerCase();
+            const matchFilter = filter === "all" || getFilter(id) === filter;
+            const q = search.toLowerCase();
+            const matchSearch = !search || name.includes(q) || id.toLowerCase().includes(q);
+            return matchFilter && matchSearch;
+          });
+
+          list.innerHTML = "";
+          if (filtered.length === 0) {
+            empty.style.display = "block";
+            list.style.display = "none";
+            return;
+          }
+          empty.style.display = "none";
+          list.style.display = "grid";
+
+          filtered.forEach((id) => {
+            const provider = getProvider(id);
+            const color = PROVIDER_COLORS[provider] || "#6e6c82";
+            const displayName = getDisplayName(id);
+            const div = document.createElement("div");
+            div.className = "model-item";
+            div.setAttribute("role", "listitem");
+            div.innerHTML = `
+              <span class="model-dot" style="background:${color}"></span>
+              <span class="model-name">${displayName}</span>
+            `;
+            list.appendChild(div);
+          });
+        }
+
+        let currentFilter = "all";
+        let currentSearch = "";
+
+        document.addEventListener("DOMContentLoaded", () => {
+          renderModels(currentFilter, currentSearch);
+
+          document.getElementById("model-search")?.addEventListener("input", (e) => {
+            const target = e.target as HTMLInputElement | null;
+            currentSearch = target?.value || "";
+            renderModels(currentFilter, currentSearch);
+          });
+
+          document.querySelectorAll(".mpill").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document.querySelectorAll(".mpill").forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              const button = btn as HTMLButtonElement;
+              currentFilter = button.dataset.filter || "all";
+              renderModels(currentFilter, currentSearch);
+            });
+          });
+        });
+      })();
+    </script>
+
+  </body>
 </html>
