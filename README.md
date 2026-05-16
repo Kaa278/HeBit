@@ -1,43 +1,60 @@
-# Astro Starter Kit: Minimal
+# HeBit Landing Page
+
+Landing page Astro untuk HeBit, termasuk playground chat yang memakai server-side API route agar API key tidak terekspos ke browser.
+
+## Setup Environment
+
+1. Salin file contoh environment:
 
 ```sh
-npm create astro@latest -- --template minimal
+cp .env.example .env
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2. Isi `HEBIT_API_KEY` di `.env` dengan API key aktif:
 
-## 🚀 Project Structure
+```env
+HEBIT_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+> Catatan: `.env` sudah masuk `.gitignore`, jadi jangan commit file ini. Restart dev server setelah membuat atau mengubah `.env`, karena Astro membaca environment variable saat server start. Untuk deployment, set `HEBIT_API_KEY` lewat dashboard environment variables provider hosting yang dipakai.
+
+## Cara Menjalankan
+
+Install dependency:
+
+```sh
+npm install
+```
+
+Jalankan dev server:
+
+```sh
+npm run dev
+```
+
+Buka `http://localhost:4321`.
+
+## Perintah Project
+
+| Command | Fungsi |
+| :-- | :-- |
+| `npm install` | Install dependency |
+| `npm run dev` | Jalankan dev server di `localhost:4321` |
+| `npm run build` | Build production ke `./dist/` |
+| `npm run preview` | Preview hasil build production |
+| `npm run astro -- --help` | Bantuan Astro CLI |
+
+## Struktur Penting
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/pages/index.astro      # Landing page utama + playground UI
+src/pages/api/chat.ts      # Proxy API chat server-side
+.env.example               # Contoh konfigurasi environment
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Catatan API Playground
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Browser hanya memanggil endpoint internal `/api/chat`.
+- Endpoint `/api/chat` meneruskan request ke upstream HeBit dari server.
+- `HEBIT_API_KEY` hanya dibaca di server melalui environment variable.
+- Jika `HEBIT_API_KEY` belum diset, endpoint akan mengembalikan error konfigurasi server.

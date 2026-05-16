@@ -1,15 +1,325 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: node_modules/, mysql_data/, .next/, build/, dist/, .gradle/, .dart_tool/, *.frm, *.ibd, *.MAD, *.MAI, *.CSM, *.lock, *.log, .env, .env.*, *.png, *.jpg, *.jpeg, *.gif, *.svg, *.ico, *.woff, *.woff2, *.ttf
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+public/
+  scripts/
+    HeBit-Linux-Installer.zip
+    hebit-windows-installer.zip
+  favicon.ico
+  favicon.svg
+src/
+  pages/
+    api/
+      chat.ts
+    index.astro
+.gitignore
+astro.config.mjs
+package.json
+README.md
+tsconfig.json
+vercel.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
+    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
+    <style>
+        path { fill: #000; }
+        @media (prefers-color-scheme: dark) {
+            path { fill: #FFF; }
+        }
+    </style>
+</svg>
+</file>
+
+<file path="src/pages/api/chat.ts">
+import type { APIRoute } from "astro";
+
+export const prerender = false;
+
+const BASE_URL = "https://hellobit-1.tailc64650.ts.net/v1";
+const API_KEY = import.meta.env.HEBIT_API_KEY;
+const DEFAULT_PLAYGROUND_MODEL = "groq/llama-3.3-70b-versatile";
+
+export const POST: APIRoute = async ({ request }) => {
+  try {
+    const body = await request.json().catch(() => null);
+    const prompt = typeof body?.prompt === "string" ? body.prompt.trim() : "";
+    const displayModel = typeof body?.displayModel === "string" && body.displayModel.trim()
+      ? body.displayModel.trim().slice(0, 80)
+      : "Llama 3.3 70B (Fast)";
+
+    if (!prompt) {
+      return new Response(JSON.stringify({ error: "Prompt wajib diisi." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    if (!API_KEY) {
+      return new Response(JSON.stringify({ error: "HEBIT_API_KEY belum dikonfigurasi di environment server. Pastikan .env terisi lalu restart dev server Astro." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const upstream = await fetch(`${BASE_URL}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: DEFAULT_PLAYGROUND_MODEL,
+        max_tokens: 300,
+        stream: false,
+        messages: [
+          {
+            role: "system",
+            content:
+              `Kamu adalah asisten yang selalu menjawab dalam Bahasa Indonesia yang natural, jelas, dan ringkas. Jika user bertanya kamu menggunakan model apa, identitas model apa, atau pertanyaan sejenis, jawab bahwa kamu menggunakan ${displayModel}. Jangan menyebut model internal lain.`,
+          },
+          { role: "user", content: prompt },
+        ],
+      }),
+    });
+
+    const text = await upstream.text();
+    let data: any;
+
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // Fallback kalau upstream kirim SSE (data: ...)
+      const chunks = text
+        .split("\n")
+        .filter((line) => line.startsWith("data:"))
+        .map((line) => line.replace(/^data:\s*/, "").trim())
+        .filter((line) => line && line !== "[DONE]");
+
+      let merged = "";
+      for (const chunk of chunks) {
+        try {
+          const parsed = JSON.parse(chunk);
+          merged += parsed?.choices?.[0]?.delta?.content || "";
+        } catch {
+          // ignore malformed chunk
+        }
+      }
+
+      data = merged
+        ? { choices: [{ message: { content: merged } }] }
+        : { error: text || "API HeBit mengembalikan respons non-JSON." };
+    }
+
+    return new Response(JSON.stringify(data), {
+      status: upstream.status,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+
+    return new Response(JSON.stringify({ error: `Gagal menghubungi API HeBit: ${message}` }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+};
+</file>
+
+<file path=".gitignore">
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+</file>
+
+<file path="README.md">
+# HeBit Landing Page
+
+Landing page Astro untuk HeBit, termasuk playground chat yang memakai server-side API route agar API key tidak terekspos ke browser.
+
+## Setup Environment
+
+1. Salin file contoh environment:
+
+```sh
+cp .env.example .env
+```
+
+2. Isi `HEBIT_API_KEY` di `.env` dengan API key aktif:
+
+```env
+HEBIT_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+> Catatan: `.env` sudah masuk `.gitignore`, jadi jangan commit file ini. Restart dev server setelah membuat atau mengubah `.env`, karena Astro membaca environment variable saat server start. Untuk deployment, set `HEBIT_API_KEY` lewat dashboard environment variables provider hosting yang dipakai.
+
+## Cara Menjalankan
+
+Install dependency:
+
+```sh
+npm install
+```
+
+Jalankan dev server:
+
+```sh
+npm run dev
+```
+
+Buka `http://localhost:4321`.
+
+## Perintah Project
+
+| Command | Fungsi |
+| :-- | :-- |
+| `npm install` | Install dependency |
+| `npm run dev` | Jalankan dev server di `localhost:4321` |
+| `npm run build` | Build production ke `./dist/` |
+| `npm run preview` | Preview hasil build production |
+| `npm run astro -- --help` | Bantuan Astro CLI |
+
+## Struktur Penting
+
+```text
+src/pages/index.astro      # Landing page utama + playground UI
+src/pages/api/chat.ts      # Proxy API chat server-side
+.env.example               # Contoh konfigurasi environment
+```
+
+## Catatan API Playground
+
+- Browser hanya memanggil endpoint internal `/api/chat`.
+- Endpoint `/api/chat` meneruskan request ke upstream HeBit dari server.
+- `HEBIT_API_KEY` hanya dibaca di server melalui environment variable.
+- Jika `HEBIT_API_KEY` belum diset, endpoint akan mengembalikan error konfigurasi server.
+</file>
+
+<file path="tsconfig.json">
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
+</file>
+
+<file path="vercel.json">
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
+}
+</file>
+
+<file path="astro.config.mjs">
+// @ts-check
+import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
+
+// https://astro.build/config
+export default defineConfig({
+  output: 'server',
+  adapter: vercel(),
+});
+</file>
+
+<file path="package.json">
+{
+  "name": "hebit",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^10.0.7",
+    "astro": "^6.3.2"
+  }
+}
+</file>
+
+<file path="src/pages/index.astro">
 ---
 const whatsappNumber = "6285176729586";
-
-const promoEndDate = "20 Juni 2026";
 
 const products = [
   {
     name: "Paket Harian All Model",
     shortName: "Harian",
-    price: "Rp10.000",
-    priceShort: "Rp10k",
-    priceOld: "Rp20k",
+    price: "Rp20.000",
+    priceShort: "Rp20k",
     duration: "1 hari",
     description: "Akses semua model termasuk Claude Opus 3.7 dengan limit unlimited untuk kebutuhan intensif harian.",
     badge: "Starter",
@@ -20,9 +330,8 @@ const products = [
   {
     name: "Paket Mingguan All Model",
     shortName: "Mingguan",
-    price: "Rp60.000",
-    priceShort: "Rp60k",
-    priceOld: "Rp80k",
+    price: "Rp80.000",
+    priceShort: "Rp80k",
     duration: "7 hari",
     description: "Akses semua model termasuk Claude Opus 3.7 dengan limit unlimited untuk kebutuhan intensif mingguan.",
     badge: "Paling Laris",
@@ -33,9 +342,8 @@ const products = [
   {
     name: "Paket Bulanan All Model",
     shortName: "Bulanan",
-    price: "Rp150.000",
-    priceShort: "Rp150k",
-    priceOld: "Rp249k",
+    price: "Rp249.000",
+    priceShort: "Rp249k",
     duration: "30 hari",
     description: "Akses semua model premium dengan limit unlimited untuk workflow rutin, produktif, dan lebih hemat.",
     badge: "Paling Hemat",
@@ -543,34 +851,7 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
         font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em;
         color: var(--ink); margin-bottom: 8px;
       }
-      .card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 7px; flex-wrap: wrap; }
-      .price-old {
-        font-size: .85rem;
-        font-weight: 500;
-        color: var(--muted);
-        text-decoration: line-through;
-        text-decoration-color: #ef4444;
-        opacity: .75;
-        margin-right: 2px;
-      }
-      .featured .price-old { color: #a5b4fc; opacity: .7; }
-      .promo-banner {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(90deg, #dc2626 0%, #f97316 100%);
-        color: #fff;
-        font-size: .78rem;
-        font-weight: 700;
-        letter-spacing: .02em;
-        padding: 7px 16px;
-        border-radius: 8px;
-        margin-bottom: 28px;
-        width: fit-content;
-        box-shadow: 0 2px 12px rgba(220,38,38,.25);
-      }
-      .promo-banner .promo-icon { font-size: 1rem; flex-shrink: 0; }
-      .promo-banner .promo-until { opacity: .85; font-weight: 500; margin-left: 2px; }
+      .card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 7px; }
       .price-num {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 2.2rem; font-weight: 800;
@@ -1434,7 +1715,7 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
                 <div class="usage-bar"><div class="usage-fill"></div></div>
                 <div class="mini-grid">
                   <div class="mini-card">
-                    <div class="mini-val">Rp60k</div>
+                    <div class="mini-val">Rp80k</div>
                     <div class="mini-desc">akses 7 hari, limit unlimited</div>
                   </div>
                   <div class="mini-card">
@@ -1455,12 +1736,6 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
           <h2 id="produk-title" class="sec-title">Pilih durasi yang paling pas.</h2>
           <p class="sec-sub">Mulai dari akses singkat untuk testing sampai paket bulanan yang lebih hemat untuk pemakaian rutin.</p>
 
-          <div class="promo-banner" aria-label="Promo terbatas">
-            <span class="promo-icon">🔥</span>
-            <span>Harga Promo!</span>
-            <span class="promo-until">Berlaku sampai {promoEndDate}</span>
-          </div>
-
           <div class="products-grid">
             {products.map((p) => (
               <article class={`price-card ${p.featured ? "featured" : ""}`} aria-label={`Paket ${p.name}`}>
@@ -1470,7 +1745,6 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
                 </div>
                 <h3 class="card-name">{p.name}</h3>
                 <div class="card-price">
-                  <span class="price-old">{p.priceOld}</span>
                   <span class="price-num">{p.priceShort}</span>
                   <span class="price-per">/{p.shortName.toLowerCase()}</span>
                 </div>
@@ -2220,3 +2494,6 @@ const consultLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("
 
   </body>
 </html>
+</file>
+
+</files>
